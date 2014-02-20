@@ -1,0 +1,41 @@
+{
+    "name": "robvanaarle/ultimo-twitter-rest",
+    "description": "OO Twitter Rest API 1.1 Client",
+    "type": "library",
+    "keywords": [
+        "Twitter",
+        "API",
+        "Rest"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+	  		{
+	    	  "name": "Rob van Aarle"
+	  		}
+	  ],
+    "repositories": [
+      	{
+        	"type": "vcs",
+        	"url": "https://github.com/robvanaarle/ultimo-oauth"
+      	},
+      	{
+        	"type": "vcs",
+        	"url": "https://github.com/robvanaarle/ultimo-http"
+      	},
+      	{
+        	"type": "vcs",
+        	"url": "https://github.com/robvanaarle/ultimo-dobject"
+      	}
+    ],
+    "require": {
+        "robvanaarle/ultimo-oauth": "dev-master",
+        "robvanaarle/ultimo-http": "dev-master",
+        "robvanaarle/ultimo-dobject": "dev-master"
+    },
+    "autoload": {
+    		"psr-4": {
+       			"ultimo\\": "src/ultimo/"
+    		}
+  }
+}
+
