@@ -113,14 +113,14 @@ class Client {
     return $this->getRequest('search/tweets', $getParams, 'SearchResult');
   }
   
-  protected function getRequest($action, $getParams, $type) {
+  protected function getRequest($action, $getParams, $type, $allowNull=false) {
     $request = new HttpRequest($this->baseUrl . $action . '.json');
     $request->setGetParams($getParams);
     
-    return $this->request($request, $type);
+    return $this->request($request, $type, $allowNull);
   }
   
-  protected function request(HttpRequest $request, $type) {
+  protected function request(HttpRequest $request, $type, $allowNull) {
     // add oAuth Authorization header
     $header = $this->oauth->generateHeader(
             $request->getMethod(),
@@ -137,6 +137,11 @@ class Client {
     // connection error handling
     if (json_last_error() != JSON_ERROR_NONE) {
       throw new exceptions\ConnectionException("Invalid json: {$body}", exceptions\ConnectionException::INVALID_RESPONSE);
+    }
+    
+    // check if data is null if no allowed
+    if (!$allowNull && $data === null) {
+      throw new exceptions\ConnectionException("Invalid response: {$body}", exceptions\ConnectionException::INVALID_RESPONSE);
     }
     
     // client error handling

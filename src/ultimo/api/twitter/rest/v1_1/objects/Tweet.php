@@ -46,4 +46,25 @@ class Tweet extends \ultimo\api\twitter\rest\v1_1\Object {
   public $withheld_copyright;
   public $withheld_in_countries;
   public $withheld_scope;
+  
+  public function getCreatedAtTimestamp() {
+    return strtotime($this->created_at);
+  }
+  
+  public function getCreatedAtDiff() {
+    $createdAt = new \DateTime($this->created_at);
+    $diff = $createdAt->diff(new \DateTime());
+    
+    if ($diff->y > 0) {
+      return array('value' => $diff->y, 'unit' => 'years');
+    } elseif ($diff->d > 0) {
+      return array('value' => $diff->d, 'unit' => 'days');
+    } elseif ($diff->h > 0) {
+      return array('value' => $diff->h, 'unit' => 'hours');
+    } elseif ($diff->i > 0) {
+      return array('value' => $diff->i, 'unit' => 'minutes');
+    } else {
+      return array('value' => $diff->s, 'unit' => 'seconds');
+    }
+  }
 }
