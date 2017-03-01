@@ -57,6 +57,8 @@ class Tweet extends \ultimo\api\twitter\rest\v1_1\Object {
     
     if ($diff->y > 0) {
       return array('value' => $diff->y, 'unit' => 'years');
+    } elseif ($diff->m > 0) {
+      return array('value' => $diff->m, 'unit' => 'months');
     } elseif ($diff->d > 0) {
       return array('value' => $diff->d, 'unit' => 'days');
     } elseif ($diff->h > 0) {
